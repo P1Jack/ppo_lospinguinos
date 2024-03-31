@@ -4,6 +4,10 @@ body {
 	text-align: center
 }
 
+p {
+    font-size: 20px;
+}
+
 .tab {
 	display: none;
 }
@@ -49,7 +53,7 @@ input.invalid {
 
 .button1 {
 	background-color: green;
-	float: right;
+
 	border: none;
 	font-family: Varela Round;
 	border-radius: 5px;

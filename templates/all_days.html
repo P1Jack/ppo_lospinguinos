@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ style }}">
+</head>
+
+<form action="/all_days" method="post">
+    <h3>Поиск по дате (введите дату в формате чч-мм-гггг)</h3>
+    <input name="zxc" type="text" required value=""/>
+    <button type="submit" class="button1" style="width:135px;height:45px;">Найти</button>
+</form>
+
+<form action >
+    <h3>Создание своего поля</h3>
+    <button type="submit" class="button1" style="width:135px;height:45px;">Создать</button>
+</form>
+{% if data %}
+
+    <div class="mb-5 row"></div>
+    {% if context %}
+        {% for e in context %}
+        <div class="mb-2 row"></div>
+        <h3>Информация на {{ date }}</h3>
+        <div style="display: inline-block;">
+            {% if e == data %}
+            {% for i in context[e][0] %}
+            {% for j in context[e][1] %}
+            {% if (i, j) in context[e][5] %}
+            <button type="button" style="background-color: yellow;" disabled>{{ context[e][4][i][j] }}</button>
+            {% else %}
+            <button type="button" style="background-color: white;" disabled>{{ context[e][4][i][j] }}</button>
+            {% endif %}
+            {% endfor %}
+            {% endfor %}
+            <p>Репетиции проводятся в комнатах: {{ ' '.join(context[e][2]) }}</p>
+            <p>Всего горят {{ context[e][3] }} комнат</p>
+
+            {% endif %}
+        </div>
+        {% endfor %}
+    {% else %}
+         <H3>Такой даты не существует</H3>
+    {% endif %}
+
+
+{% else %}
+    <div class="mb-5 row"></div>
+
+    {% for e in context %}
+    <div class="mb-2 row"></div>
+    <h3>Информация на {{ date }}</h3>
+    <div style="display: inline-block;">
+        {% for i in context[e][0] %}
+        {% for j in context[e][1] %}
+        {% if (i, j) in context[e][5] %}
+        <button type="button" style="background-color: yellow;" disabled>{{ context[e][4][i][j] }}</button>
+        {% else %}
+        <button type="button" style="background-color: white;" disabled>{{ context[e][4][i][j] }}</button>
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+        <p>Репетиции проводятся в комнатах: {{ ' '.join(context[e][2]) }}</p>
+        <p>Всего горят {{ context[e][3] }} комнат</p>
+    </div>
+    {% endfor %}
+{% endif %}
+
+
+{% endblock %}

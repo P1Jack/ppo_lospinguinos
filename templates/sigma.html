@@ -1,31 +1,33 @@
 {% extends "base.html" %}
 
 {% block content %}
-	<head><link rel="stylesheet" type="text/css" href="{{ style }}" ></head>
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ style }}">
+</head>
 <div class="box-1">
-  <div class="row align-items-start">
-    <div class="col-4 d-flex flex-column" style="margin: 100px 0px">
-      <h3 Формат данных/>
-       <h5>По одному дню (введите дату чч-мм-гггг)</h5>
-        <h5>или</h5>
-        <h5>по всем (оставте пустым)</h5>
-        <form action="/all_days" method="post">
-            <input name="zxc" type="text" required value=""/>
-            <button type="submit" class="button1" style="width:135px;height:45px;">Перейти</button>
-        </form>
-      <h5>Кол-во комнат по всем дням</h5>
-      <form action="/all_days">
-      <button class="button1" style="width:150px;height:45px;cursor:pointer">Перейти</button>
-        </form>
-    </body>
+    <div class="row align-items-start">
+        <div class="col-4 d-flex flex-column" style="margin: 100px 0px">
+            <h3 Формат данных/>
+            <h5>По одному дню (введите дату чч-мм-гггг)</h5>
+            <h5>или</h5>
+            <h5>по всем (оставте пустым)</h5>
+            <form action="/all_days" method="post">
+                <input name="zxc" type="text" required value=""/>
+                <button type="submit" class="button1" style="width:135px;height:45px;">Перейти</button>
+            </form>
+            <h5>Кол-во комнат по всем дням</h5>
+            <form action="/all_days">
+                <button class="button1" style="width:150px;height:45px;cursor:pointer">Перейти</button>
+            </form>
+        </div>
     </div>
-  </div>
 </div>
 <footer>
-  <div style="background: black; color: white; padding: 10px; margin-top: 10px">
-    <h3>Проект команды «Los penguinos»</h3>
-    <h5>Наша команда разработчиков:<br>Тимур Шагеев<br>Селиверстов Дмитрий<br>Егоров Пётр<br>Глазков Слава<br>Катышкин Олег</h5>
-  </div>
+    <div style="background: black; color: white; padding: 10px; margin-top: 10px">
+        <h3>Проект команды «Los penguinos»</h3>
+        <h5>Наша команда разработчиков:<br>Тимур Шагеев<br>Селиверстов Дмитрий<br>Егоров Пётр<br>Глазков Слава<br>Катышкин
+            Олег</h5>
+    </div>
 </footer>
 
 {% endblock %}
