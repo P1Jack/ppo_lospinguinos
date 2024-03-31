@@ -85,20 +85,29 @@ def get_data_from_date(date: str):
     return get_rooms_numbers(windows, windows_for_flat, date)
 
 
-data = get_data_from_date("25-01-23")
-print(data)
+def get_all_dates():
+    response = requests.get(
+        "https://olimp.miet.ru/ppo_it_final/date",
+        headers={"X-Auth-Token": "ppo_11_30013"},
+    )
 
-date = data["date"]
-date = time.ctime(date).split()
-date_table = ("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
-date = f'{date[2]}-{date_table.index(date[1]) + 1}-{date[4]}'
+    return response.json()["message"]
 
-floors = data["height"]
-windows = data["width"]
-lights = data["rooms"]
-count = data["count"]
-wall = data["home"]
-coords = data["light"]
 
-contex = [date, floors, windows, lights, count, wall, coords, data["correct"]]
-print(contex)
+def chickity(dat):
+    data = get_data_from_date(dat)
+
+    date = data["date"]
+    date = time.ctime(date).split()
+    date_table = ("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+    date = f'{date[2]}-{date_table.index(date[1]) + 1}-{date[4]}'
+
+    floors = data["height"]
+    windows = data["width"]
+    lights = data["rooms"]
+    count = data["count"]
+    wall = data["home"]
+    coords = data["light"]
+
+    contex = [date, floors, windows, json.dumps(lights), count, json.dumps(wall), json.dumps(coords), data["correct"]]
+    return contex
