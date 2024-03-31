@@ -84,4 +84,13 @@ def get_data_from_date(date: str):
     return get_rooms_numbers(windows, windows_for_flat, date)
 
 
-print(get_data_from_date("25-01-23"))
+def get_all_dates():
+    response = requests.get(
+        "https://olimp.miet.ru/ppo_it_final/date",
+        headers={"X-Auth-Token": "ppo_11_30013"},
+    )
+
+    return response.json()["message"]
+
+
+print(get_all_dates())
