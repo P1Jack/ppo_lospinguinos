@@ -1,1 +1,1 @@
-print('Pizdec world')
+ppo_10_17605
