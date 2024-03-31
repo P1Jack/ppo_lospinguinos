@@ -1,0 +1,48 @@
+<html>
+	<head>
+		<title>Регистрация</title>
+		<link rel="stylesheet" type="text/css" href="../static/css/css_for_reg.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Varela Round">
+	</head>
+	<body>
+		<h1>Регистрация</h1>
+		{% with messages = get_flashed_messages() %}
+		 {% if messages %}
+		  <ul class="ul_cl">
+		  {% for message in messages %}
+			<li>{{ message }}</li>
+		  {% endfor %}
+		  </ul>
+		 {% endif %}
+		{% endwith %}
+		<div class="box-1">
+			<form id='form' method="post">
+				<div class='tab'>
+					<p>Пожалуйста, введите ваше имя и фамилию:</p>
+					<p><input placeholder="Ваше имя" name="name" class="name"></p>
+					<p><input placeholder="Ваша фамилия" name="surname" class="surname"></p>
+				</div>
+				<div class='tab'>
+					<p>Пожалуйста, введите вашу контактную информацию и код администратора (только для админов):</p>
+					<p><input placeholder="Ваша почта" name="email" type="email"></p>
+					<p><input placeholder="Код админа" name="admin"></p>
+				</div>
+				<div class='tab'>
+					<p>Пожалуйста, придумайте логин и пароль:</p>
+					<p><input placeholder="Ваш логин" name="login"></p>
+					<p><input placeholder="Придумайте пароль" name="password" type="password"></p>
+				</div>
+				<div style='overflow: auto;'>
+					<button id='next' type='button' class="button1" onclick="moveTab(1)">Следующий шаг</button>
+					<button id='prev' class="button1" type='button' onclick="moveTab(-1)">Предыдущий шаг</button>
+				</div>
+				<div>
+					<span class="step active"></span>
+					<span class="step"></span>
+					<span class="step"></span>
+				</div>
+			</form>
+		</div>
+		<script src="{{url_for('static', filename='script.js')}}"></script>
+	</body>
+</html>

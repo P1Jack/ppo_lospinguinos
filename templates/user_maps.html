@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<head><link rel="stylesheet" type="text/css" href="{{ style }}" ></head>
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+          <ul class="ul_cl">
+          {% for message in messages %}
+            <li style="color: green;">{{ message }}</li>
+          {% endfor %}
+          </ul>
+    {% endif %}
+{% endwith %}
+<h1>Ваши поля</h1>
+<div class="center-r">
+        <form action="/user/prizes_view" method="get">
+            <input type="hidden" name="login" id="log" value="{{ login }}" />
+            <input type="hidden" name="prizes" id="log" value="{{ prizes }}" />
+            <button class="button1" style="width:200px;height:45px;cursor:pointer">Посмотреть призы</button>
+        </form>
+</div>
+
+<div class="box-1">
+    {% if not data: %}
+        <h3>У вас пока что нет карт. Дождитесь, пока вас добавит админ</h3>
+    {% else: %}
+        {% for i in data %}
+            <div style="display: flex; justify-content: space-between; border-bottom: 1px solid black;">
+                <div>
+                    <h2>{{ i[3] }}</h2>
+                    <h5>Попыток: {{ i[2] }}</h5>
+                </div>
+                <div style="display: flex; align-items: flex-end; margin: 0px;">
+                    <form action="/user/maps" method="post">
+                        <input type="hidden" name="login" id="log" value="{{ login }}" />
+                        <button name="map" value="{{ i[0] }}" class="button1" style="width:135px;height:45px;">Перейти</button>
+                    </form>
+
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+</div>
+
+
+{% endblock %}

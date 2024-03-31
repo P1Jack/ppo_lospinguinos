@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<head><link rel="stylesheet" type="text/css" href="{{ style }}" ></head>
+<div class="box-1">
+  <div class="row align-items-start">
+    <div class="col-8">
+    <body>
+      <p> Правила игры «Морской бой» знает, пожалуй, практически каждый в нашей стране. Это одна из наиболее известных, популярных и простых настольных игр, тем не менее, отличающаяся высокой интересностью и разнообразием правил. Наша версия чуть отличается...</p>
+      <p>Правила игры</p>
+      <p>1) Админ расставляет корабли на поле и размещает под ними разные призы на разную сумму</p>
+      <p>2) Вы делаете «выстрелы», выбирая те или иные координаты поля, при попадании вам открывается поле и если вы потопили корабль, то получаете подарок</p>
+      <p>3) Количество выстрелов зависит от ваших баллов в нашем магазине (1 выстрел равен 100 баллам)</p>
+      <p>4) Используются только однопалубные корабли и никакие из них не соприкасаются, в том числе и по диагонали</p>
+    </div>
+    <div class="col-4 d-flex flex-column" style="margin: 100px 0px">
+      <form action="/reg">
+        <button class="button1" style="width:150px;height:45px;cursor:pointer">Регистрация</button>
+      </form>
+      <form action="/log_in">
+      <button class="button1" style="width:150px;height:45px;cursor:pointer">Вход</button>
+      </form>
+    </body>
+    </div>
+  </div>
+</div>
+<footer>
+  <div style="background: black; color: white; padding: 10px; margin-top: 10px">
+    <h3>Проект команды «Los penguinos»</h3>
+    <h5>Наша команда разработчиков:<br>Тимур Шагеев<br>Селиверстов Дмитрий<br>Егоров Пётр<br>Глазков Слава<br>Катышкин Олег</h5>
+  </div>
+</footer>
+
+{% endblock %}
