@@ -1,8 +1,10 @@
 import requests
+import json
 import numpy as np
+from datetime import datetime
 
 
-def get_rooms_numbers(windows_for_room: dict, windows: list[int]):
+def get_rooms_numbers(windows_for_room: dict, windows: list[int], date: int):
     windows_for_room_list = sorted(list(windows_for_room.items()), key=lambda x: x[0])
     windows_for_room_list = [i for _, i in windows_for_room_list]
     height = len(windows_for_room_list)
@@ -23,52 +25,34 @@ def get_rooms_numbers(windows_for_room: dict, windows: list[int]):
                 light_coordinates.append((idx, j))
                 rooms.add(arr[idx][j])
 
-    return arr, light_coordinates, rooms, len(rooms)
+    rooms = list(rooms)
+    rooms.sort()
+
+    return arr, light_coordinates, rooms, len(rooms), date
 
 
-print(get_rooms_numbers({
-            "floor_1": [
-                False,
-                True,
-                False,
-                True,
-                False,
-                False
-            ],
-            "floor_2": [
-                True,
-                False,
-                True,
-                False,
-                False,
-                True
-            ],
-            "floor_3": [
-                False,
-                False,
-                True,
-                False,
-                True,
-                False
-            ],
-            "floor_4": [
-                False,
-                False,
-                False,
-                True,
-                False,
-                True
-            ]
-        }, [
-            3,
-            2,
-            1
-        ]))
+def test_rooms_correct(rooms: list[int], number: int, date: int):
+    from_timestamp = datetime.fromtimestamp(date).strftime("%d-%m-%Y")
+    from_timestamp = from_timestamp.split("-")
+    yy = from_timestamp[-1][-2:]
+    from_timestamp = from_timestamp[0] + "-" + from_timestamp[1] + "-" + yy
+    d = {
+        "data": {
+            "count": number,
+            "rooms": rooms
+        },
+        "date": from_timestamp
+    }
 
+    d_json = json.dumps(d)
+    return d_json
+
+
+print(test_rooms_correct([1, 2, 4, 6, 7, 8, 11, 12], 8, 1674594000))
 
 response = requests.get(
-    "https://olimp.miet.ru/ppo_it_final",
-    params={"X-Auth-Token": "ppo_10_17605"},
+    "https://olimp.miet.ru/ppo_it_final/date",
+    headers={"X-Auth-Token": "ppo_11_30013"},
 )
 
 
