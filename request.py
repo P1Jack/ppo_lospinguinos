@@ -2,6 +2,7 @@ import requests
 import json
 import numpy as np
 from datetime import datetime
+import time
 
 
 def get_rooms_numbers(windows: dict, windows_for_room: list[int], date: int):
@@ -84,13 +85,20 @@ def get_data_from_date(date: str):
     return get_rooms_numbers(windows, windows_for_flat, date)
 
 
-def get_all_dates():
-    response = requests.get(
-        "https://olimp.miet.ru/ppo_it_final/date",
-        headers={"X-Auth-Token": "ppo_11_30013"},
-    )
+data = get_data_from_date("25-01-23")
+print(data)
 
-    return response.json()["message"]
+date = data["date"]
+date = time.ctime(date).split()
+date_table = ("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+date = f'{date[2]}-{date_table.index(date[1]) + 1}-{date[4]}'
 
+floors = data["height"]
+windows = data["width"]
+lights = data["rooms"]
+count = data["count"]
+wall = data["home"]
+coords = data["light"]
 
-print(get_all_dates())
+contex = [date, floors, windows, lights, count, wall, coords, data["correct"]]
+print(contex)
