@@ -44,18 +44,25 @@ def test_rooms_correct(rooms: list[int], number: int, date: int):
         "date": from_timestamp
     }
 
-    d_json = json.dumps(d)
-    return d_json
+    url = "https://olimp.miet.ru/ppo_it_final"
+    headers = {
+        "Content-Type": "application/json",
+        "X-Auth-Token": "ppo_10_17608"
+    }
 
+    resp = requests.post(url, data=json.dumps(d), headers=headers)
+    return resp.json()
 
-print(test_rooms_correct([1, 2, 4, 6, 7, 8, 11, 12], 8, 1674594000))
 
 response = requests.get(
-    "https://olimp.miet.ru/ppo_it_final/date",
+    "https://olimp.miet.ru/ppo_it_final",
     headers={"X-Auth-Token": "ppo_11_30013"},
+    params={
+        "day": "25",
+        "month": "01",
+        "year": "23"
+    }
 )
 
-
-print(response.json())
 
 
