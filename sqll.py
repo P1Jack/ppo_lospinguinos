@@ -1,4 +1,5 @@
 import sqlite3
+from request import *
 
 
 def init_database():
@@ -18,13 +19,18 @@ def init_database():
 
 
 def save_day(data):
+    if not data[7]:
+        return 'Failed to get date information'
     con = sqlite3.connect('predprof.db')
     cur = con.cursor()
-    cur.execute("""INSERT INTO dayz (date, floors, windows, lights, count, wall, coords) 
-                           VALUES (?, ?, ?, ?, ?, ?, ?)
-                        """, (data[0], data[1], data[2], data[3], data[4], data[5], data[6]))
-    con.commit()
-    return True
+    try:
+        cur.execute("""INSERT INTO dayz (date, floors, windows, lights, count, wall, coords) 
+                               VALUES (?, ?, ?, ?, ?, ?, ?)
+                            """, (data[0], data[1], data[2], data[3], data[4], data[5], data[6]))
+        con.commit()
+        return True
+    except Exception as e:
+        return True
 
 
 def get_day(date):
@@ -34,7 +40,7 @@ def get_day(date):
         data_all = cur.execute("""SELECT * FROM dayz""").fetchall()
     else:
         try:
-            data_all = cur.execute("""SELECT floor_num, windows, lights, count FROM dayz WHERE date=?""", (date,)).fetchall()
+            data_all = cur.execute("""SELECT * FROM dayz WHERE date=?""", (date,)).fetchall()
         except Exception as e:
             return str(e)[26:]
     context = {el[0]: [el[1], el[2], el[3], el[4], el[5], el[6]] for el in data_all}
