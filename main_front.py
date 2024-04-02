@@ -19,10 +19,12 @@ def first():
     return render_template('sigma.html', style=url_for('static', filename='css/css_for_reg.css'))
 
 
-@app.route('/all_days', methods=['GET'])
+@app.route('/all_days', methods=['POST'])
 def reg():
     date = request.form['zxc']
     context = get_day(date)
+    print(context)
+    print(context[date])
     return render_template('all_days.html', style=url_for('static', filename='css/css_for_reg.css'), context=context)
 
 

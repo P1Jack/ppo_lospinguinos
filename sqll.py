@@ -43,5 +43,7 @@ def get_day(date):
             data_all = cur.execute("""SELECT * FROM dayz WHERE date=?""", (date,)).fetchall()
         except Exception as e:
             return str(e)[26:]
-    context = {el[0]: [el[1], el[2], el[3], el[4], el[5], el[6]] for el in data_all}
+    print(data_all)
+    context = {el[1]: [el[2], int(el[3]), json.loads(el[4]), el[5], json.loads(el[6]), json.loads(el[7])] for el in data_all}
+    print(context)
     return context
